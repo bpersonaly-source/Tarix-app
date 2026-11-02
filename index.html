@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tarix xazinasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+:root{--deep:#071528;--lapis:#0c2a4d;--turq:#35c2b4;--gold:#e2b857;--ivory:#f2ead7;--mute:#9fb3c8}
+html,body{background:var(--deep);color:var(--ivory);font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.55}
+body{min-height:100vh;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);
+background:
+radial-gradient(120% 60% at 50% 0%,#14437a 0%,rgba(20,67,122,0) 70%),
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cg fill='none' stroke='%2335c2b4' stroke-opacity='.1'%3E%3Crect x='14' y='14' width='28' height='28'/%3E%3Crect x='14' y='14' width='28' height='28' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E"),
+linear-gradient(180deg,var(--lapis),var(--deep) 60%)}
+body.on{overflow:hidden}
+main{max-width:560px;margin:0 auto;padding:0 18px 48px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:34px 0 22px}
+.star{width:210px;height:210px;display:block;margin:0 auto -34px}
+.star *{fill:none;stroke:var(--turq);stroke-width:1.2}
+.star .d{stroke-dasharray:1;stroke-dashoffset:1;animation:dr 2.4s cubic-bezier(.6,.1,.2,1) forwards}
+.star .d2{animation-delay:.5s;stroke:var(--gold)}
+.star .dots{stroke-dasharray:1.5 5;stroke-opacity:.7;animation:none}
+.star .slow{transform-origin:100px 100px;animation:sp 90s linear infinite}
+.star .gold{fill:var(--gold);stroke:none}
+@keyframes dr{to{stroke-dashoffset:0}}
+@keyframes sp{to{transform:rotate(360deg)}}
+h1{font-family:'Marcellus',Georgia,serif;font-weight:400;font-size:clamp(40px,12vw,56px);line-height:1.05;letter-spacing:.02em;
+background:linear-gradient(180deg,#fff3cf,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;
+filter:drop-shadow(0 4px 22px rgba(226,184,87,.3));opacity:0;animation:in 1.2s ease 1.5s forwards}
+.sub{color:var(--mute);margin-top:8px;opacity:0;animation:in 1.2s ease 1.9s forwards}
+@keyframes in{to{opacity:1}}
+
+/* search */
+.search{display:flex;align-items:center;gap:10px;margin:8px 0 26px;padding:0 16px;height:50px;border-radius:999px;border:1px solid rgba(53,194,180,.4);background:rgba(7,21,40,.7)}
+.search input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ivory);font:inherit;font-size:16px}
+.search input::placeholder{color:var(--mute)}
+.search:focus-within{border-color:var(--turq);box-shadow:0 0 0 3px rgba(53,194,180,.18)}
+
+/* timeline */
+.tl{position:relative;padding-left:44px}
+.tl::before{content:"";position:absolute;left:15px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--turq),var(--gold));opacity:.5}
+.era{position:relative;display:block;width:100%;text-align:left;margin-bottom:18px;padding:16px;border:1px solid rgba(53,194,180,.28);border-radius:26px 26px 8px 8px;background:linear-gradient(160deg,rgba(22,64,110,.6),rgba(8,24,46,.75));transition:transform .15s,border-color .15s}
+.era::before{content:"";position:absolute;left:-34px;top:24px;width:12px;height:12px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 0 4px var(--deep),0 0 14px rgba(226,184,87,.6)}
+.era:active{transform:scale(.985);border-color:var(--turq)}
+.top{display:flex;align-items:center;gap:14px}
+.arch{flex:none;display:grid;place-items:center;width:50px;height:58px;font-size:26px;border-radius:999px 999px 8px 8px;border:1px solid rgba(226,184,87,.55);background:rgba(226,184,87,.08)}
+.yr{display:block;color:var(--gold);font-size:14px;letter-spacing:.03em}
+h3{font-family:'Marcellus',Georgia,serif;font-weight:400;font-size:23px;line-height:1.2}
+.era p{margin-top:10px;color:var(--mute);font-size:15px}
+.cnt{display:block;margin-top:10px;color:var(--turq);font-size:14px}
+
+/* source rows */
+.res{display:block}
+.src{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin-bottom:10px;padding:12px 14px;border-radius:14px;border:1px solid rgba(242,234,215,.13);background:rgba(242,234,215,.05)}
+.src:active{border-color:var(--turq);background:rgba(53,194,180,.1)}
+.src b{font-weight:600;display:block;line-height:1.3}
+.src small{color:var(--mute);font-size:14px}
+.src .i{flex:none;font-size:22px}
+.src .go{margin-left:auto;color:var(--turq);font-size:22px}
+.none{color:var(--mute);text-align:center;padding:20px 0}
+.res h4{font-family:'Marcellus',Georgia,serif;font-weight:400;color:var(--gold);font-size:15px;margin:14px 0 8px}
+
+/* sheet */
+.ov{position:fixed;inset:0;z-index:5;background:rgba(3,10,22,.72);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;max-width:560px;margin:0 auto;max-height:88vh;overflow:auto;padding:14px 18px calc(24px + env(safe-area-inset-bottom,0px));
+border-radius:44px 44px 0 0;border-top:2px solid var(--turq);background:linear-gradient(180deg,#0f3560,#081a33 40%);transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+body.on .ov{opacity:1;pointer-events:auto}
+body.on .sheet{transform:none}
+.grab{width:44px;height:4px;border-radius:4px;background:rgba(242,234,215,.3);margin:0 auto 16px}
+.sh-h{display:flex;align-items:center;gap:14px}
+.sh-h h2{font-family:'Marcellus',Georgia,serif;font-weight:400;font-size:26px;line-height:1.15}
+.desc{color:var(--mute);margin:12px 0 16px;font-size:15px}
+.close{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(242,234,215,.25);font-size:18px}
+.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));z-index:9;transform:translate(-50%,20px);opacity:0;padding:10px 18px;border-radius:999px;background:var(--gold);color:#241a05;font-size:15px;transition:.25s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:var(--mute);font-size:14px;margin-top:10px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.star .d{stroke-dashoffset:0}h1,.sub{opacity:1}}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <svg class="star" viewBox="0 0 200 200" aria-hidden="true">
+      <circle class="d" pathLength="1" cx="100" cy="100" r="94"/>
+      <g class="slow">
+        <rect class="d" pathLength="1" x="42" y="42" width="116" height="116"/>
+        <rect class="d" pathLength="1" x="42" y="42" width="116" height="116" transform="rotate(45 100 100)"/>
+      </g>
+      <g class="slow" style="animation-direction:reverse;animation-duration:140s">
+        <rect class="d d2" pathLength="1" x="62" y="62" width="76" height="76"/>
+        <rect class="d d2" pathLength="1" x="62" y="62" width="76" height="76" transform="rotate(45 100 100)"/>
+      </g>
+      <circle class="dots" cx="100" cy="100" r="82"/>
+      <circle class="gold" cx="100" cy="100" r="4"/>
+    </svg>
+    <h1>Tarix xazinasi</h1>
+    <p class="sub">Davrni tanlang va kerakli manbani toping</p>
+  </header>
+
+  <label class="search"><span aria-hidden="true">🔍</span>
+    <input id="q" type="search" placeholder="Manba yoki muallif nomi" autocomplete="off">
+  </label>
+
+  <section id="list"></section>
+  <footer>@tarixtestliderbot</footer>
+</main>
+
+<div class="ov" id="ov"></div>
+<div class="sheet" id="sh" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* MA'LUMOTLAR: davr va manbalarni shu yerda tahrirlang.
+   Manba: [nomi, turi (Kitob/Hujjat/Video), muallif, havola] */
+const D=[
+{ic:"🏺",n:"Qadimgi dunyo",y:"miloddan avvalgi – IV asr",d:"Baqtriya, So'g'diyona, Xorazm va Aleksandr yurishlari davri.",
+ s:[["Avesto","Kitob","Zardushtiylik muqaddas matnlari",""],["Tarix","Kitob","Gerodot",""],["Aleksandr yurishi","Kitob","Arrian",""]]},
+{ic:"📜",n:"Ilk o'rta asrlar",y:"V – IX asr",d:"Turk xoqonligi, arab istilosi va islomning tarqalishi.",
+ s:[["Buxoro tarixi","Kitob","Narshaxiy",""],["Payg'ambarlar va podshohlar tarixi","Kitob","Tabariy",""],["Mamlakatlar fathi","Kitob","Balazuriy",""]]},
+{ic:"🔭",n:"Uyg'onish davri",y:"IX – XII asr",d:"Xorazmiy, Beruniy va Ibn Sino davri: fan va madaniyat gullagan asrlar.",
+ s:[["Qadimgi xalqlardan qolgan yodgorliklar","Kitob","Beruniy",""],["Tib qonunlari","Kitob","Ibn Sino",""],["Qutadg'u bilig","Kitob","Yusuf Xos Hojib",""]]},
+{ic:"🏰",n:"Temuriylar davri",y:"XIV – XV asr",d:"Amir Temur saltanati, Ulug'bek ilm maktabi va Samarqand shuhrati.",
+ s:[["Temur tuzuklari","Kitob","Amir Temur",""],["Zafarnoma","Kitob","Sharafiddin Ali Yazdiy",""],["Zij-i Sultoniy","Kitob","Ulug'bek",""]]},
+{ic:"🕌",n:"Xonliklar davri",y:"XVI – XIX asr",d:"Buxoro, Xiva va Qo'qon xonliklari tarixi.",
+ s:[["Boburnoma","Kitob","Zahiriddin Muhammad Bobur",""],["Shajarayi turk","Kitob","Abulg'ozi Bahodirxon",""],["Firdavs ul-iqbol","Kitob","Munis va Ogahiy",""]]},
+{ic:"✒️",n:"Jadidlar va mustaqillik",y:"XIX asr oxiri – hozir",d:"Ma'rifatparvar jadidlar, sho'rolar davri va O'zbekiston mustaqilligi.",
+ s:[["Padarkush","Kitob","Mahmudxo'ja Behbudiy",""],["Oila yoki oilani boshqarish tartiblari","Kitob","Abdurauf Fitrat",""],["O'zbekiston Respublikasi Konstitutsiyasi","Hujjat","",""]]}
+];
+const $=s=>document.querySelector(s);
+const tg=window.Telegram&&window.Telegram.WebApp;
+const IC={Kitob:"📖",Hujjat:"📜",Video:"🎞️"};
+try{if(tg){tg.ready();tg.expand();tg.setHeaderColor&&tg.setHeaderColor("#071528");tg.setBackgroundColor&&tg.setBackgroundColor("#071528");
+  tg.BackButton&&tg.BackButton.onClick(closeSheet);}}catch(e){}
+
+const row=(s,sec)=>`<button class="src" data-u="${s[3]}"><span class="i">${IC[s[1]]||"📄"}</span><span><b>${s[0]}</b><small>${[s[2],sec].filter(Boolean).join(" · ")}</small></span><span class="go">›</span></button>`;
+
+function home(){
+  const q=$("#q").value.trim().toLowerCase(), el=$("#list");
+  if(!q){
+    el.className="tl";
+    el.innerHTML=D.map((x,i)=>`<button class="era" data-i="${i}"><div class="top"><span class="arch">${x.ic}</span><div><span class="yr">${x.y}</span><h3>${x.n}</h3></div></div><p>${x.d}</p><span class="cnt">${x.s.length} ta manba ›</span></button>`).join("");
+    return;
+  }
+  el.className="res";
+  const r=[];
+  D.forEach(x=>x.s.forEach(s=>{if((s[0]+" "+s[2]+" "+x.n).toLowerCase().includes(q))r.push(row(s,x.n))}));
+  el.innerHTML=r.length?r.join(""):'<p class="none">Hech narsa topilmadi. Boshqa nom yozib ko\'ring.</p>';
+}
+
+function openSheet(i){
+  const x=D[i];
+  $("#sh").innerHTML=`<button class="close" data-x="1" aria-label="Yopish">✕</button><div class="grab"></div><div class="sh-h"><span class="arch">${x.ic}</span><div><span class="yr">${x.y}</span><h2>${x.n}</h2></div></div><p class="desc">${x.d}</p><div class="res">${x.s.map(s=>row(s)).join("")}</div>`;
+  $("#sh").scrollTop=0;
+  document.body.classList.add("on");
+  try{tg&&tg.BackButton&&tg.BackButton.show()}catch(e){}
+}
+function closeSheet(){
+  document.body.classList.remove("on");
+  try{tg&&tg.BackButton&&tg.BackButton.hide()}catch(e){}
+}
+let tt;
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
+
+document.addEventListener("click",e=>{
+  const era=e.target.closest(".era"), src=e.target.closest(".src");
+  if(era)return openSheet(+era.dataset.i);
+  if(e.target.closest("[data-x]")||e.target.id==="ov")return closeSheet();
+  if(src){
+    const u=src.dataset.u;
+    if(!u)return toast("Havola hali qo'shilmagan");
+    if(tg&&tg.openLink)tg.openLink(u);else window.open(u,"_blank");
+  }
+});
+$("#q").addEventListener("input",home);
+home();
+</script>
+</body>
+</html>
