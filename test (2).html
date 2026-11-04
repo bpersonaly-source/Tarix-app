@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tarix imtihoni</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--deep:#071528;--lapis:#0c2a4d;--turq:#35c2b4;--gold:#e2b857;--ivory:#f2ead7;--mute:#9fb3c8;--bad:#e5806f}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--deep);color:var(--ivory);font:17px/1.5 'Spectral',Georgia,serif}
+body{min-height:100vh;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);background:radial-gradient(120% 50% at 50% 0,#14437a,rgba(20,67,122,0) 70%),linear-gradient(180deg,var(--lapis),var(--deep) 60%)}
+main{max-width:560px;margin:0 auto;padding:0 16px 40px}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+h1,h2{font-family:'Marcellus',Georgia,serif;font-weight:400}
+h1{font-size:36px;text-align:center;margin:34px 0 4px;background:linear-gradient(180deg,#fff3cf,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:22px;color:var(--gold);margin:22px 0 10px}
+.sub{text-align:center;color:var(--mute);margin-bottom:22px}
+.card{display:block;width:100%;text-align:left;text-decoration:none;color:inherit;margin-bottom:14px;padding:18px;border:1px solid rgba(53,194,180,.3);border-radius:26px 26px 8px 8px;background:linear-gradient(160deg,rgba(22,64,110,.6),rgba(8,24,46,.75))}
+.card b{font-family:'Marcellus',serif;font-weight:400;font-size:22px;display:block}
+.card small{color:var(--mute)}
+.btn{display:block;width:100%;padding:14px;border-radius:999px;background:var(--gold);color:#241a05;font-weight:600;margin-top:16px}
+.btn[disabled]{opacity:.4!important}
+.code{width:100%;height:64px;text-align:center;font-size:34px;letter-spacing:.5em;border-radius:18px;border:1px solid var(--turq);background:rgba(7,21,40,.7);outline:0}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 -16px;padding:10px 16px;background:rgba(7,21,40,.94);border-bottom:1px solid rgba(53,194,180,.3)}
+.bar #t{font:24px 'Marcellus',serif;color:var(--gold)}
+.bar #t.low{color:var(--bad)}
+.bar #fin{padding:8px 16px;border-radius:999px;background:var(--turq);color:#04211e;font-weight:600}
+.r{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.r b{width:30px;color:var(--mute);font-weight:600}
+.r button{flex:1;min-width:0;padding:0;height:44px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(242,234,215,.05)}
+.r button.on{background:var(--gold);border-color:var(--gold);color:#241a05;font-weight:600}
+.w{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.w b{width:30px;color:var(--mute)}
+.w input{flex:1;min-width:0;height:44px;padding:0 12px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.w input:focus{border-color:var(--turq)}
+.gr{color:#04211e;background:var(--gold);padding:1px 12px;border-radius:999px;font-weight:600}
+.d{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.d span{width:100px;color:var(--mute)}
+.d i{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--turq),var(--gold));min-width:2px}
+.g{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.g div{text-align:center;padding:4px 0;border-radius:10px;font-weight:600}
+.g small{display:block;font-size:11px;font-weight:400;opacity:.8}
+.y{background:rgba(53,194,180,.18);border:1px solid var(--turq)}
+.n{background:rgba(229,128,111,.15);border:1px solid var(--bad)}
+.wl p{padding:6px 10px;margin-top:6px;border-radius:10px}
+[hidden]{display:none!important}
+.inp{width:100%;height:46px;padding:0 12px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.inp:focus{border-color:var(--turq)}
+.lb{display:block;margin:14px 0 6px;color:var(--mute)}
+.row2{display:flex;gap:8px}.row2 .inp{flex:1;min-width:0}
+.mini{padding:0 14px;border-radius:12px;border:1px solid var(--turq);color:var(--turq);white-space:nowrap}
+.chk{display:flex;align-items:center;gap:10px;margin:12px 0 4px;color:var(--mute)}
+.chk input{width:20px;height:20px;accent-color:var(--gold)}
+.pg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.pg small{display:block;text-align:center;font-size:11px;color:var(--mute)}
+.pg input{width:100%;height:38px;padding:0 4px;text-align:center;border-radius:10px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.hint{color:var(--mute);font-size:15px;margin-bottom:10px}
+.btn.ghost{background:none;border:1px solid rgba(242,234,215,.3);color:var(--ivory)}
+.bar .bk{padding:8px 16px;border-radius:999px;border:1px solid var(--turq);color:var(--turq)}
+.tw b{width:42px}
+main{position:relative;z-index:1}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#fx .tile{position:absolute;inset:-56px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cg fill='none' stroke='%2335c2b4' stroke-opacity='.13'%3E%3Crect x='14' y='14' width='28' height='28'/%3E%3Crect x='14' y='14' width='28' height='28' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E");animation:tile 28s linear infinite}
+#fx .sky{position:absolute;left:0;bottom:0;width:100%;height:170px;animation:breath 6s ease-in-out infinite}
+#fx .em{position:absolute;bottom:-8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);opacity:0;animation:up linear infinite}
+@keyframes tile{to{transform:translate(56px,56px)}}
+@keyframes breath{50%{opacity:.55}}
+@keyframes up{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(var(--x),-105vh);opacity:0}}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes glow{50%{filter:drop-shadow(0 4px 30px rgba(226,184,87,.7))}}
+@keyframes dw{to{stroke-dashoffset:0}}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(2);opacity:.5}}
+@keyframes ring{50%{box-shadow:0 0 28px rgba(226,184,87,.5)}}
+@keyframes shine{to{left:115%}}
+.in{opacity:0;animation:in 1s ease var(--d,0s) forwards}
+h1.in{animation:in 1.2s ease var(--d,0s) forwards,glow 4s ease-in-out 2.8s infinite}
+.star{width:220px;height:220px;display:block;margin:20px auto -40px;filter:drop-shadow(0 0 16px rgba(53,194,180,.4))}
+.star *{fill:none;stroke:var(--turq);stroke-width:1.2}
+.star .d{stroke-dasharray:1;stroke-dashoffset:1;animation:dw 2.4s cubic-bezier(.6,.1,.2,1) forwards}
+.star .d2{animation-delay:.5s;stroke:var(--gold)}
+.star .dots{stroke-dasharray:1.5 5;stroke-opacity:.7}
+.star .slow{transform-origin:100px 100px;animation:sp 60s linear infinite}
+.star .rev{animation-direction:reverse;animation-duration:90s}
+.star .gold{fill:var(--gold);stroke:none;transform-origin:100px 100px;animation:pulse 2.5s ease-in-out infinite}
+.enter{position:relative;overflow:hidden;display:block;width:100%;margin-top:28px;padding:22px 16px;text-align:center;border:1px solid var(--gold);border-radius:34px 34px 10px 10px;background:linear-gradient(160deg,rgba(226,184,87,.22),rgba(8,24,46,.85));font:28px 'Marcellus',Georgia,serif;color:var(--gold);opacity:0;animation:in 1s ease 2.2s forwards,ring 3s ease-in-out 3.4s infinite}
+.enter::after{content:"";position:absolute;top:0;bottom:0;left:-80px;width:60px;background:linear-gradient(100deg,transparent,rgba(255,243,207,.5),transparent);animation:shine 3.5s ease-in-out 3.2s infinite}
+.enter small{display:block;margin-top:4px;font:15px 'Spectral',Georgia,serif;color:var(--mute)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.in,.enter{opacity:1!important}.star .d{stroke-dashoffset:0}.em{display:none}}
+.r.tp{gap:6px}
+.pt{width:54px;flex:none;height:44px;padding:0 4px;text-align:center;border-radius:12px;border:1px solid var(--turq);background:rgba(7,21,40,.7);color:var(--gold);outline:0}
+.pt:focus{border-color:var(--gold)}
+.sumbox{margin:18px 0 0;padding:12px;border-radius:14px;border:1px solid rgba(226,184,87,.4);text-align:center;color:var(--mute)}
+.sumbox b{color:var(--gold);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.stats div{padding:12px;border:1px solid rgba(53,194,180,.3);border-radius:16px;background:rgba(8,24,46,.6);text-align:center}
+.stats i{font-style:normal;font-size:20px}
+.stats b{display:block;font:26px 'Marcellus',serif;color:var(--gold);font-weight:400}
+.stats small{color:var(--mute)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.acts .mini{height:38px}
+.card.ex small{display:block}
+.ta{width:100%;min-height:90px;padding:10px 12px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0;resize:vertical}
+.ta:focus{border-color:var(--turq)}
+.trow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid rgba(242,234,215,.1)}
+.trow span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trow .mini{height:34px;border-color:var(--bad);color:var(--bad)}
+</style>
+</head>
+<body>
+<main id="a"></main>
+<script>
+const tg=window.Telegram&&Telegram.WebApp,P=new URLSearchParams(location.search),$=s=>document.querySelector(s),A=$("#a");
+try{tg.ready();tg.expand();tg.setHeaderColor("#071528");tg.setBackgroundColor("#071528")}catch(e){}
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const OPT=i=>i>=32?"ABCDEF":"ABCD";
+const hap=()=>{try{tg.HapticFeedback.selectionChanged()}catch(e){}};
+const send=o=>{try{tg.sendData(JSON.stringify(o))}catch(e){alert("Ilovani Telegramdagi pastki «Tarix» tugmasi orqali oching.")}};
+const dec=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.charCodeAt(0))))};
+
+const STAR=`<svg class="star" viewBox="0 0 200 200" aria-hidden="true"><circle class="d" pathLength="1" cx="100" cy="100" r="94"/><g class="slow"><rect class="d" pathLength="1" x="42" y="42" width="116" height="116"/><rect class="d" pathLength="1" x="42" y="42" width="116" height="116" transform="rotate(45 100 100)"/></g><g class="slow rev"><rect class="d d2" pathLength="1" x="62" y="62" width="76" height="76"/><rect class="d d2" pathLength="1" x="62" y="62" width="76" height="76" transform="rotate(45 100 100)"/></g><circle class="dots" cx="100" cy="100" r="82"/><circle class="gold" cx="100" cy="100" r="4"/></svg>`;
+const SKY=`<svg class="sky" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g fill="#14437a" opacity=".6"><rect y="100" width="400" height="20"/><path d="M165 120V72a35 35 0 0 1 70 0v48z"/><path d="M174 62a26 30 0 0 1 52 0z"/><rect x="199" y="22" width="2" height="12"/><rect x="118" y="44" width="8" height="76"/><rect x="274" y="44" width="8" height="76"/><path d="M116 44h12l-6-12zM272 44h12l-6-12z"/><rect x="20" y="82" width="92" height="38"/><rect x="288" y="82" width="92" height="38"/><path d="M46 82a16 14 0 0 1 32 0zM322 82a16 14 0 0 1 32 0z"/></g></svg>`;
+function atmo(){
+  if($("#fx"))return;
+  const f=document.createElement("div");
+  f.id="fx";
+  let h='<div class="tile"></div>'+SKY;
+  for(let i=0;i<22;i++){const s=2+Math.random()*3;h+=`<i class="em" style="left:${Math.random()*100}%;width:${s}px;height:${s}px;--x:${(Math.random()*80-40)|0}px;animation-duration:${(8+Math.random()*10)|0}s;animation-delay:-${(Math.random()*14)|0}s"></i>`}
+  f.innerHTML=h;
+  document.body.prepend(f);
+}
+
+function home(){
+  atmo();A.onclick=A.oninput=null;
+  const TC=P.get("t")=="1";
+  A.innerHTML=`${STAR}<h1 class="in" style="--d:1.4s">Tarix imtihoni</h1><p class="sub in" style="--d:1.8s">Milliy sertifikat formatidagi sinov</p>
+  <button class="enter" id="go">Testga kirish<small>O'qituvchi bergan 4 xonali kod bilan</small></button>
+  ${TC?`<button class="card in" style="--d:2.6s;margin:18px 0 0" id="tc"><b>👨‍🏫 O'qituvchi bo'limi</b><small>Yangi test tuzish: javoblar va ballarni kiriting</small></button>`:""}
+  <p class="sub in" style="--d:2.8s;margin-top:22px">Natijalar e'lon qilingach bot sizga yuboradi.</p>`;
+  $("#go").onclick=code;
+  if(TC)$("#tc").onclick=teacher;
+}
+
+function code(){
+  atmo();A.onclick=A.oninput=null;
+  A.innerHTML=`${STAR}<h1 class="in" style="--d:.6s">Kirish kodi</h1><p class="sub in" style="--d:.9s">O'qituvchi aytgan 4 ta raqamni kiriting</p>
+  <input id="c" class="code in" style="--d:1.1s" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••">
+  <button class="btn in" style="--d:1.3s" id="ok" disabled>Davom etish</button>`;
+  const c=$("#c"),ok=$("#ok");
+  c.oninput=()=>{c.value=c.value.replace(/\D/g,"");ok.disabled=c.value.length!=4};
+  ok.onclick=()=>send({t:"code",c:c.value});
+  c.focus();
+}
+
+function exam(){
+  const E=P.get("e"),st=+P.get("st")*1000,du=(+P.get("du")||3600)*1000,K="ans"+E;
+  let S,done=0;
+  try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+  if(!S||!S.m||S.m.length!=35||!S.w||S.w.length!=20)S={m:Array(35).fill(""),w:Array(20).fill("")};
+  const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+  const cnt=()=>S.m.filter(Boolean).length+S.w.filter(x=>x.trim()).length;
+  let h=`<div class="bar"><span id="t">--:--</span><span id="n"></span><button id="fin">Tugatish</button></div><h2>Test savollari</h2>`;
+  for(let i=0;i<35;i++)h+=`<div class="r"><b>${i+1}</b>${[...OPT(i)].map(v=>`<button data-q="${i}" data-v="${v}" class="${S.m[i]==v?"on":""}">${v}</button>`).join("")}</div>`;
+  h+=`<h2>Yozma savollar</h2>`;
+  for(let j=0;j<10;j++)h+=`<div class="w"><b>${36+j}</b><input data-w="${2*j}" placeholder="a)" maxlength="40" value="${esc(S.w[2*j])}"><input data-w="${2*j+1}" placeholder="b)" maxlength="40" value="${esc(S.w[2*j+1])}"></div>`;
+  A.innerHTML=h;
+  const tick=()=>{
+    const l=Math.max(0,st+du-Date.now()),s=Math.ceil(l/1000);
+    $("#t").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+    $("#t").className=l<3e5?"low":"";
+    $("#n").textContent=cnt()+"/55";
+    if(!l&&!done){done=1;fin()}
+  };
+  const fin=()=>{
+    let w=S.w.slice(),o;
+    const mk=()=>({t:"sub",e:+E,m:S.m.map(x=>x||"-").join(""),w:w});
+    while(new Blob([JSON.stringify(o=mk())]).size>3900)w=w.map(x=>x.slice(0,Math.max(0,x.length-5)));
+    save();send(o);
+  };
+  A.onclick=ev=>{
+    const b=ev.target.closest("[data-q]");
+    if(b){
+      const i=+b.dataset.q,v=b.dataset.v;
+      S.m[i]=S.m[i]==v?"":v;
+      b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.v==S.m[i]));
+      save();hap();tick();
+    }
+    if(ev.target.id=="fin"){
+      const m="Javob berilgan: "+cnt()+"/55. Tugatilsinmi? Qayta o'zgartirib bo'lmaydi.";
+      const go=()=>{done=1;fin()};
+      tg&&tg.showConfirm?tg.showConfirm(m,ok=>ok&&go()):confirm(m)&&go();
+    }
+  };
+  A.oninput=ev=>{const w=ev.target.dataset.w;if(w!=null){S.w[+w]=ev.target.value;save();tick()}};
+  tick();setInterval(tick,1000);
+}
+
+function teacher(){
+  const K="newexam";
+  const D={n:"",c:"",m:Array(35).fill(""),w:Array(20).fill(""),mp:"1.1",wp:"1",mps:Array(35).fill(""),wps:Array(20).fill("")};
+  let S;
+  try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+  S=Object.assign({},D,S||{});
+  for(const k of["m","w","mps","wps"])if(!Array.isArray(S[k])||S[k].length!=D[k].length)S[k]=D[k].slice();
+  S.mps=S.mps.map(v=>v===""||v==null?S.mp:v);
+  S.wps=S.wps.map(v=>v===""||v==null?S.wp:v);
+  const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+  const note=t=>{try{tg.showAlert(t)}catch(e){alert(t)}};
+  const vars=x=>String(x||"").split("|").map(v=>v.trim()).filter(Boolean);
+  const num=v=>{const x=Number(String(v==null?"":v).replace(",",".").trim());return isFinite(x)&&x>0&&x<=1000?x:0};
+  const wl=j=>(36+(j>>1))+"ab"[j&1];
+  const cnt=()=>S.m.filter(Boolean).length+S.w.filter(x=>vars(x).length).length;
+  const sum=a=>a.reduce((x,y)=>x+y,0);
+
+  let h=`<div class="bar"><span id="t">🛠 Test tuzish</span><span id="n"></span><button class="bk" id="bk">Orqaga</button></div>
+  <h2>Imtihon</h2>
+  <label class="lb">Imtihon nomi</label><input class="inp" id="tn" maxlength="100" placeholder="Masalan: Tarix · 1-variant" value="${esc(S.n)}">
+  <label class="lb">4 xonali kirish kodi</label>
+  <div class="row2"><input class="inp" id="tc2" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off" value="${esc(S.c)}"><button class="mini" id="rnd">🎲 Tasodifiy</button></div>
+  <h2>Test javoblari va ballari (1–35)</h2>
+  <p class="hint">Javobni tanlang, o'ng tomondagi katakka shu savolning bali yoziladi. 33–35-savollarda E va F ham bor.</p>
+  <label class="lb">Barcha test savollariga bir xil ball</label>
+  <div class="row2"><input class="inp" id="mp" inputmode="decimal" value="${esc(S.mp)}"><button class="mini" id="mpa">Hammasiga qo'llash</button></div>
+  <div style="height:12px"></div>`;
+  for(let i=0;i<35;i++)h+=`<div class="r tp"><b>${i+1}</b>${[...OPT(i)].map(v=>`<button data-q="${i}" data-v="${v}" class="${S.m[i]==v?"on":""}">${v}</button>`).join("")}<input class="pt" data-ms="${i}" inputmode="decimal" aria-label="${i+1}-savol bali" value="${esc(S.mps[i])}"></div>`;
+  h+=`<h2>Yozma javoblar va ballari (36–45)</h2>
+  <p class="hint">Bir nechta to'g'ri variantni | belgisi bilan ajrating. Masalan: Amir Temur | Temur. O'ng tomondagi katak shu qismning bali.</p>
+  <label class="lb">Barcha yozma qismlarga bir xil ball</label>
+  <div class="row2"><input class="inp" id="wp" inputmode="decimal" value="${esc(S.wp)}"><button class="mini" id="wpa">Hammasiga qo'llash</button></div>
+  <div style="height:12px"></div>`;
+  for(let j=0;j<20;j++)h+=`<div class="w tw"><b>${wl(j)}</b><input data-w="${j}" maxlength="120" placeholder="javob | variant" value="${esc(S.w[j])}"><input class="pt" data-ws="${j}" inputmode="decimal" aria-label="${wl(j)} bali" value="${esc(S.wps[j])}"></div>`;
+  h+=`<div class="sumbox" id="sm"></div>
+  <button class="btn" id="sv">Saqlash va botga yuborish</button>
+  <button class="btn ghost" id="clr">Tozalash</button>`;
+  A.innerHTML=h;
+  const upd=()=>{
+    $("#n").textContent=cnt()+"/55";
+    const tm=sum(S.mps.map(num)),tw=sum(S.wps.map(num));
+    $("#sm").innerHTML=`Test: <b>${tm.toFixed(1)}</b> · Yozma: <b>${tw.toFixed(1)}</b> · Jami: <b>${(tm+tw).toFixed(1)}</b> ball`;
+  };
+  upd();
+
+  A.oninput=ev=>{
+    const e=ev.target,d=e.dataset;
+    if(e.id=="tn")S.n=e.value;
+    else if(e.id=="tc2"){e.value=e.value.replace(/\D/g,"");S.c=e.value}
+    else if(e.id=="mp")S.mp=e.value;
+    else if(e.id=="wp")S.wp=e.value;
+    else if(d.w!=null)S.w[+d.w]=e.value;
+    else if(d.ms!=null)S.mps[+d.ms]=e.value;
+    else if(d.ws!=null)S.wps[+d.ws]=e.value;
+    save();upd();
+  };
+
+  A.onclick=ev=>{
+    const t=ev.target,b=t.closest("[data-q]");
+    if(b){
+      const i=+b.dataset.q,v=b.dataset.v;
+      S.m[i]=S.m[i]==v?"":v;
+      b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.v==S.m[i]));
+      save();hap();upd();return;
+    }
+    if(t.id=="bk")return home();
+    if(t.id=="rnd"){S.c=String(1000+Math.floor(Math.random()*9000));$("#tc2").value=S.c;save();return}
+    if(t.id=="mpa"){
+      if(!num(S.mp))return note("Avval to'g'ri ball yozing (masalan 1.1).");
+      S.mps=S.mps.map(()=>S.mp);
+      A.querySelectorAll("[data-ms]").forEach(x=>x.value=S.mp);
+      save();upd();return;
+    }
+    if(t.id=="wpa"){
+      if(!num(S.wp))return note("Avval to'g'ri ball yozing (masalan 1).");
+      S.wps=S.wps.map(()=>S.wp);
+      A.querySelectorAll("[data-ws]").forEach(x=>x.value=S.wp);
+      save();upd();return;
+    }
+    if(t.id=="clr"){
+      const go=()=>{try{localStorage.removeItem(K)}catch(e){}teacher()};
+      const m="Kiritilgan hamma narsa o'chirilsinmi?";
+      try{tg.showConfirm(m,ok=>ok&&go())}catch(e){confirm(m)&&go()}
+      return;
+    }
+    if(t.id=="sv")submit();
+  };
+
+  const submit=()=>{
+    const n=S.n.trim(),c=S.c.trim();
+    if(n.length<2)return note("Imtihon nomini yozing.");
+    if(!/^\d{4}$/.test(c))return note("Kirish kodi aynan 4 ta raqam bo'lsin.");
+    const miss=[];S.m.forEach((v,i)=>{if(!v)miss.push(i+1)});
+    if(miss.length)return note("Javobi belgilanmagan test savollari: "+miss.join(", "));
+    const wv=S.w.map(vars),wm=[];wv.forEach((v,j)=>{if(!v.length)wm.push(wl(j))});
+    if(wm.length)return note("Yozma javobi yo'q qismlar: "+wm.join(", "));
+    const mp=S.mps.map(num),wp=S.wps.map(num);
+    let k=mp.indexOf(0);
+    if(k>=0)return note("Test bali noto'g'ri yoki bo'sh: "+(k+1)+"-savol.");
+    k=wp.indexOf(0);
+    if(k>=0)return note("Yozma qism bali noto'g'ri yoki bo'sh: "+wl(k));
+    const o={t:"new",n:n,c:c,k:S.m.join(""),mp:mp,w:wv,wp:wp};
+    if(new Blob([JSON.stringify(o)]).size>3900)return note("Yozma javoblar juda uzun. Variantlarni qisqartiring (Telegram chegarasi 4 KB).");
+    const tm=sum(mp),tw=sum(wp);
+    const m=`${n}\nKod: ${c}\nTest: 35 ta, jami ${tm.toFixed(1)} ball\nYozma: 20 qism, jami ${tw.toFixed(1)} ball\n\nBotga yuborilsinmi?`;
+    const go=()=>{try{localStorage.removeItem(K)}catch(e){}send(o)};
+    try{tg.showConfirm(m,ok=>ok&&go())}catch(e){confirm(m)&&go()}
+  };
+}
+
+const sdata=()=>{try{return dec(P.get("s")||"")}catch(e){return{}}};
+const warn=t=>{try{tg.showAlert(t)}catch(e){alert(t)}};
+const ask=(m,f)=>{try{tg.showConfirm(m,ok=>ok&&f())}catch(e){confirm(m)&&f()}};
+const EXST={ready:"tayyor",open:"davom etmoqda",closed:"yopilgan",published:"e'lon qilingan"};
+
+function exBlock(E){
+  if(!E||!E.length)return `<p class="hint">Hozircha imtihon yo'q.</p>`;
+  return E.map(e=>{
+    const id=e[0],s=e[2],bt=(x,l)=>`<button class="mini" data-ex="${id}" data-x="${x}">${l}</button>`;
+    const b=s=="ready"?bt("go","▶️ Boshlash")+bt("del","🗑 O'chirish")
+      :s=="open"?bt("cl","⏹ Yopish")
+      :s=="closed"?bt("rs","📊 Rasch e'lon")+bt("sm","📊 Oddiy e'lon")+bt("del","🗑")
+      :bt("top","🏆 Top-10")+bt("csv","📄 CSV")+bt("del","🗑");
+    return `<div class="card ex"><b>#${id} ${esc(e[1])}</b><small>${EXST[s]||esc(s)} · ${esc(e[3])} ta topshirgan</small><div class="acts">${b}</div></div>`;
+  }).join("");
+}
+
+function onAct(ev){
+  const t=ev.target.closest("button");
+  if(!t)return;
+  const val=id=>(($("#"+id)||{}).value||"").trim(),a=t.dataset.act;
+  const S_=o=>send(Object.assign({t:"adm"},o));
+  if(t.id=="bk")return home();
+  if(t.dataset.ex){
+    const i=+t.dataset.ex,x=t.dataset.x,go=()=>S_({a:"ex",i:i,x:x});
+    const m={go:"Imtihon boshlansinmi? Barcha foydalanuvchilarga xabar yuboriladi.",cl:"Imtihon yopilsinmi?",del:"Imtihon va uning natijalari o'chirilsinmi?",rs:"Rasch modeli bilan e'lon qilinsinmi?",sm:"Oddiy ball bilan e'lon qilinsinmi?"}[x];
+    return m?ask(m,go):go();
+  }
+  if(!a)return;
+  if(a=="new")return teacher();
+  if(a=="tadd"){const v=val("ta");return v?S_({a:a,v:v}):warn("ID yoki telefon raqamini yozing.")}
+  if(a=="tdel")return ask("O'qituvchi huquqi olib tashlansinmi?",()=>S_({a:a,v:t.dataset.id}));
+  if(a=="find"){const v=val("uf");return v?S_({a:a,v:v}):warn("Ism, ID yoki telefon yozing.")}
+  if(a=="dm"){
+    const v=val("dmu"),x=val("dmt");
+    if(!v||!x)return warn("Foydalanuvchi va xabar matnini yozing.");
+    return ask("Xabar yuborilsinmi?",()=>S_({a:a,v:v,x:x}));
+  }
+  if(a=="bc"){
+    const x=val("bct");
+    if(!x)return warn("Xabar matnini yozing.");
+    return ask("Xabar BARCHA foydalanuvchilarga yuboriladi. Davom etasizmi?",()=>S_({a:a,x:x}));
+  }
+  if(a=="dur"){
+    const n=Math.round(+val("du"));
+    if(!(n>=10&&n<=240))return warn("Vaqt 10 dan 240 daqiqagacha bo'lsin.");
+    return S_({a:a,v:String(n)});
+  }
+  if(a=="retake"){
+    const v=val("rtu"),i=+val("rte");
+    if(!v||!i)return warn("Foydalanuvchi va imtihon raqamini yozing.");
+    return ask("Foydalanuvchining bu imtihondagi natijasi o'chiriladi va u qayta topshira oladi. Davom etasizmi?",()=>S_({a:a,v:v,i:i}));
+  }
+  S_({a:a});
+}
+
+function exams(){
+  atmo();
+  const D=sdata();
+  A.innerHTML=`<div class="bar"><span id="t">📋 Imtihonlar</span><span></span><button class="bk" id="bk">Orqaga</button></div>
+  <h2>Imtihonlar</h2>${exBlock(D.E)}
+  <button class="btn" data-act="new">➕ Yangi test tuzish</button>
+  <button class="btn ghost" data-act="panel">🔄 Ro'yxatni yangilash</button>
+  <button class="btn ghost" data-act="exams">💬 Chatda ko'rish</button>`;
+  A.oninput=null;A.onclick=onAct;
+}
+
+function admin(){
+  atmo();
+  const D=sdata(),n=x=>esc(D[x]==null?0:D[x]);
+  const T=(D.T||[]).map(r=>`<div class="trow"><span>🎓 ${esc(r[1])} · ${esc(r[0])}</span><button class="mini" data-act="tdel" data-id="${esc(r[0])}">Olib tashlash</button></div>`).join("")||`<p class="hint">O'qituvchilar yo'q.</p>`;
+  A.innerHTML=`<div class="bar"><span id="t">🛡 Admin</span><span></span><button class="bk" id="bk">Orqaga</button></div>
+  <h2>Statistika</h2>
+  <div class="stats">
+    <div><i>👥</i><b>${n("u")}</b><small>Foydalanuvchilar</small></div>
+    <div><i>🎓</i><b>${n("t")}</b><small>O'qituvchilar</small></div>
+    <div><i>📝</i><b>${n("e")}</b><small>Imtihonlar</small></div>
+    <div><i>📥</i><b>${n("s")}</b><small>Topshirilgan ishlar</small></div>
+  </div>
+  <p class="hint" style="margin-top:10px">Ma'lumot panel oxirgi yangilangan paytdagi. Yangilash uchun pastdagi tugmani bosing.</p>
+  <button class="btn ghost" data-act="panel" style="margin-top:0">🔄 Panelni yangilash</button>
+
+  <h2>Imtihonlar</h2>${exBlock(D.E)}
+  <button class="btn" data-act="new">➕ Yangi test tuzish</button>
+  <button class="btn ghost" data-act="exams">💬 Chatda ko'rish</button>
+
+  <h2>O'qituvchilar</h2>${T}
+  <label class="lb">Yangi o'qituvchi (ID yoki telefon)</label>
+  <div class="row2"><input class="inp" id="ta" placeholder="ID yoki +998..." autocomplete="off"><button class="mini" data-act="tadd">➕ Qo'shish</button></div>
+  <p class="hint" style="margin-top:8px">Ustoz avval botda /start bosib ro'yxatdan o'tgan bo'lishi kerak.</p>
+
+  <h2>Foydalanuvchini topish</h2>
+  <div class="row2"><input class="inp" id="uf" placeholder="Ism, ID yoki telefon" autocomplete="off"><button class="mini" data-act="find">🔎 Topish</button></div>
+  <p class="hint" style="margin-top:8px">Natijada «ustoz qilish» va «o'chirish» tugmalari chiqadi.</p>
+
+  <h2>Xabar yuborish</h2>
+  <label class="lb">Bitta foydalanuvchiga</label>
+  <input class="inp" id="dmu" placeholder="ID yoki telefon" autocomplete="off">
+  <textarea class="ta" id="dmt" maxlength="800" placeholder="Xabar matni" style="margin-top:8px"></textarea>
+  <button class="btn ghost" data-act="dm">✉️ Yuborish</button>
+  <label class="lb">Hammaga</label>
+  <textarea class="ta" id="bct" maxlength="800" placeholder="Barcha foydalanuvchilarga xabar"></textarea>
+  <button class="btn" data-act="bc">📢 Hammaga yuborish</button>
+
+  <h2>Imtihon vaqti</h2>
+  <div class="row2"><input class="inp" id="du" inputmode="numeric" value="${n("d")}"><button class="mini" data-act="dur">💾 Saqlash (daqiqa)</button></div>
+  <p class="hint" style="margin-top:8px">10–240 daqiqa. Imtihon boshlanishidan oldin o'zgartiring, davom etayotganda emas.</p>
+
+  <h2>Qayta topshirishga ruxsat</h2>
+  <p class="hint">Foydalanuvchi natijasi o'chadi va u imtihonni yana topshira oladi (imtihon davom etayotgan bo'lishi kerak).</p>
+  <div class="row2"><input class="inp" id="rtu" placeholder="Foydalanuvchi ID/telefon" autocomplete="off"><input class="inp" id="rte" inputmode="numeric" placeholder="Imtihon №" style="max-width:110px"></div>
+  <button class="btn ghost" data-act="retake">♻️ Ruxsat berish</button>
+
+  <h2>Eksport</h2>
+  <button class="btn ghost" data-act="ucsv" style="margin-top:0">📄 Foydalanuvchilar (CSV)</button>
+  <button class="btn ghost" data-act="stat">📊 Statistika (chatda)</button>`;
+  A.oninput=null;A.onclick=onAct;
+}
+
+function res(){
+  let d;
+  try{d=dec(P.get("d"))}catch(e){A.innerHTML=`<h1>Xatolik</h1><p class="sub">Natijani o'qib bo'lmadi. Botdagi tugmani qayta bosing.</p>`;return}
+  const G=["A+","A","B+","B","C+","C","Sertifikatsiz"],mx=Math.max(1,...G.map(g=>d.x[g]||0));
+  let h=`<h1>${esc(d.s)}</h1><p class="sub">${esc(d.n)} · <span class="gr">${esc(d.g)}</span><br>${esc(d.t)}</p><h2>Darajalar · ${esc(d.N)} ishtirokchi</h2>`;
+  G.forEach(g=>{const v=d.x[g]||0;h+=`<div class="d"><span>${g}</span><i style="width:${Math.round(v/mx*60)}%"></i><em>${v}</em></div>`});
+  h+=`<h2>Test javoblarim</h2><div class="g">`;
+  for(let i=0;i<35;i++)h+=`<div class="${d.o[i]=="1"?"y":"n"}"><small>${i+1}</small>${esc(d.m[i])}</div>`;
+  h+=`</div><h2>Yozma javoblarim</h2><div class="wl">`;
+  for(let j=0;j<20;j++)h+=`<p class="${d.o[35+j]=="1"?"y":"n"}"><b>${36+(j>>1)}${"ab"[j&1]})</b> ${esc((d.w&&d.w[j])||"—")}</p>`;
+  A.innerHTML=h+"</div>";
+}
+
+({exam,res,new:teacher,exams,admin}[P.get("m")]||home)();
+</script>
+</body>
+</html>
